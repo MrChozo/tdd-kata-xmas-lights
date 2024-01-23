@@ -12,6 +12,7 @@ class Grid
 
     public int $unitSize = 1;
 
+    // TODO: Move to Selection StdObject?
     public int $startXCoord = 0;
     public int $startYCoord = 0;
     public int $endXCoord = 0;
@@ -26,7 +27,7 @@ class Grid
      *    [999, 999],
      * ]
      *
-     * ---- OR.... ----
+     * ---- OR ... ----
      * [
      *     Light#0 (contains x and y coords),
      *     Light#1,
@@ -39,14 +40,34 @@ class Grid
 
     public function __construct()
     {
-
-
+        $this->initializeGridMap();
     }
 
     public function lightOnAtLocation(int $x, int $y)
     {
-
+        foreach ($this->map as $light) {
+            if ($light->)
+        }
+        return false;
     }
 
-
+    private function initializeGridMap()
+    {
+        $totalLights = 0;
+        for (
+            $x = $this->xMin;
+            $x >= $this->xMin && $x <= $this->xMax;
+            $x++
+        ) {
+            for (
+                $y = $this->yMin;
+                $y >= $this->yMin && $y <= $this->yMax;
+                $y++
+            ) {
+                $this->map[] = new Light($x, $y);
+                $totalLights++;
+            }
+        }
+        echo "Total number of Light objects created: $totalLights\n";
+    }
 }

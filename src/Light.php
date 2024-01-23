@@ -8,8 +8,14 @@ class Light
     public int $xLocation = 0;
     public int $yLocation = 0;
 
-    public function __construct()
+    /**
+     * @param int $xLocation
+     * @param int $yLocation
+     */
+    public function __construct(int $xLocation = null, int $yLocation = null)
     {
+        $this->setXLocation($xLocation);
+        $this->setYLocation($yLocation);
     }
 
     public function getLocation()
@@ -27,13 +33,13 @@ class Light
         $this->on = false;
     }
 
-    public function setXLocation(int $x)
+    public function setXLocation(int $x = null)
     {
-        $this->xLocation = $x;
+        $this->xLocation = $x ?? 0;
     }
 
-    public function setYLocation(int $y)
+    public function setYLocation(int $y = null)
     {
-        $this->yLocation = $y;
+        $this->yLocation = $y ?? 0;
     }
 }

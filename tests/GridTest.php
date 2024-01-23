@@ -27,21 +27,6 @@ class GridTest extends TestCase
     }
 
     /**
-     *        <--------------------- DISABLED!!!
-     * @ test <--------------------- DISABLED!!!
-     *        <--------------------- DISABLED!!!
-     * @return void
-     */
-    public function itTellsYouIfALightAtAGivenCoordinateIsOn(): void
-    {
-        $x = 53;
-        $y = 382;
-        $grid = new Grid();
-        $onOrOff = $grid->lightOnAtLocation($x, $y);
-        $this->assertTrue();
-    }
-
-    /**
      * @test
      * @return void
      */
@@ -60,5 +45,18 @@ class GridTest extends TestCase
             $this->assertTrue(($coord <= $grid->yMax));
             $this->assertTrue(($coord >= $grid->yMin));
         }
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function itTellsYouIfALightAtAGivenCoordinateIsOff(): void
+    {
+        $x = 53;
+        $y = 382;
+        $grid = new Grid();
+        $onOrOff = $grid->lightOnAtLocation($x, $y);
+        $this->assertFalse($onOrOff);
     }
 }
