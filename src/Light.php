@@ -47,4 +47,13 @@ class Light
     {
         $this->yLocation = $y ?? 0;
     }
+
+    public function toggleOnOff()
+    {
+        if ($this->on) {
+            $this->turnOff();
+        } else {
+            $this->turnOn();
+        }
+    }
 }

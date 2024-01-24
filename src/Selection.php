@@ -2,6 +2,10 @@
 
 namespace App;
 
+/**
+ * Accepts and contains two sets of coordinates.
+ * Example: (0, 1) going to (30, 238)
+ */
 class Selection
 {
     public int $startXCoord = 0;
@@ -10,6 +14,7 @@ class Selection
     public int $endYCoord = 0;
 
     /**
+     *
      * @param int $startXCoord
      * @param int $startYCoord
      * @param int $endXCoord

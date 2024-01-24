@@ -4,11 +4,11 @@ namespace App;
 
 class Grid
 {
-    public int $xMax = 999;
     public int $xMin = 0;
+    public int $xMax = 999;
 
-    public int $yMax = 999;
     public int $yMin = 0;
+    public int $yMax = 999;
 
     public int $unitSize = 1;
 
@@ -55,6 +55,24 @@ class Grid
             ) {
                 $i = GridIteratorString::get($x, $y);
                 $this->map[$i] = new Light($x, $y);
+            }
+        }
+    }
+
+    public function toggleLightsOnOff(Selection $selection)
+    {
+        for (
+            $x = $selection->startXCoord;
+            $x >= $selection->startXCoord && $x <= $selection->endXCoord;
+            $x++
+        ) {
+            for (
+                $y = $selection->startYCoord;
+                $y >= $selection->startYCoord && $y <= $selection->endYCoord;
+                $y++
+            ) {
+                $i = GridIteratorString::get($x, $y);
+                $this->map[$i]->toggleOnOff();
             }
         }
     }

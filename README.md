@@ -9,3 +9,5 @@ They still need to exist, even if they're off.
 
 This obviously could have been done with a simple array-based answer instead.
 
+
+[The Kata](https://kata-log.rocks/christmas-lights-kata)

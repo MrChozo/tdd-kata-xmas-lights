@@ -45,6 +45,18 @@ class LightTest extends TestCase
      * @test
      * @return void
      */
+    public function itTogglesOnOff(): void
+    {
+        $light = new Light(0, 34);
+        $init_state = $light->on = (bool)random_int(0, 1); // random state
+        $light->toggleOnOff();
+        $this->assertNotEquals($init_state, $light->on);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
     public function itsXLocationCanBeSet(): void
     {
         $x = 5;
