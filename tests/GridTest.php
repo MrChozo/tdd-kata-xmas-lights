@@ -31,6 +31,7 @@ class GridTest extends TestCase
     /**
      * @test
      * @return void
+     * @throws \Random\RandomException
      */
     public function itLightsAnAreaUsingASelection(): void
     {
@@ -48,16 +49,23 @@ class GridTest extends TestCase
         $grid = new Grid();
         $numSelections = random_int(1, 10);
 
-        echo "Feeding \$grid $numSelections Selections";
+        echo "Feeding \$grid $numSelections Selections\n\n";
 
-        for ($i = 1; $i >= $numSelections; $i++) {
+        for ($i = 1; $i <= $numSelections; $i++) {
+            echo "Selection #$i: ";
             $selection = $this->getRandomSelection($grid);
+            $this->displaySelection($selection);
             $grid->toggleLightsOnOff($selection);
         }
-        $newGrid = $grid;
+        $newGrid = clone $grid;
         $newRandomSelection = $this->getRandomSelection($grid);
+
+        echo "New Random Selection: ";
+        $this->displaySelection($newRandomSelection);
+
         $newGrid->toggleLightsOnOff($newRandomSelection);
 
+        // Perform comparison
         for (
             $x = $newRandomSelection->startXCoord;
             $x >= $newRandomSelection->startXCoord
@@ -67,12 +75,17 @@ class GridTest extends TestCase
             for (
                 $y = $newRandomSelection->startYCoord;
                 $y >= $newRandomSelection->startYCoord
-                    && $newRandomSelection->endYCoord;
+                    && $y <= $newRandomSelection->endYCoord;
                 $y++
             ) {
                 $i = GridIteratorString::get($x, $y);
-                $initLightState = $grid->map[$i]->on;
-                $newLightState = $newGrid->map[$i]->on;
+
+                $initLight = $grid->map[$i];
+                $initLightState = $initLight->on;
+
+                $newLight = $newGrid->map[$i];
+                $newLightState = $newLight->on;
+
                 $this->assertNotEquals($initLightState, $newLightState);
             }
         }
@@ -84,8 +97,8 @@ class GridTest extends TestCase
      */
     public function itTellsYouIfALightAtAGivenCoordinateIsOff(): void
     {
-        $x = 873;
-        $y = 832;
+        $x = 3;
+        $y = 2;
         $grid = new Grid();
         $onOrOff = $grid->lightOnAtLocation($x, $y);
         $this->assertFalse($onOrOff);
@@ -107,5 +120,10 @@ class GridTest extends TestCase
             $endXCoord,
             $endYCoord
         );
+    }
+
+    private function displaySelection(Selection $selection): void
+    {
+        echo "($selection->startXCoord, $selection->startYCoord) to ($selection->endXCoord, $selection->endYCoord)\n";
     }
 }
