@@ -30,31 +30,10 @@ class GridTest extends TestCase
      * @test
      * @return void
      */
-    public function itsCoordsAreInbounds(): void
-    {
-        $grid = new Grid();
-        $coords = [
-            $grid->startXCoord,
-            $grid->startYCoord,
-            $grid->endXCoord,
-            $grid->endYCoord,
-        ];
-        foreach ($coords as $coord) {
-            $this->assertTrue(($coord <= $grid->xMax));
-            $this->assertTrue(($coord >= $grid->xMin));
-            $this->assertTrue(($coord <= $grid->yMax));
-            $this->assertTrue(($coord >= $grid->yMin));
-        }
-    }
-
-    /**
-     * @test
-     * @return void
-     */
     public function itTellsYouIfALightAtAGivenCoordinateIsOff(): void
     {
-        $x = 53;
-        $y = 382;
+        $x = 873;
+        $y = 832;
         $grid = new Grid();
         $onOrOff = $grid->lightOnAtLocation($x, $y);
         $this->assertFalse($onOrOff);

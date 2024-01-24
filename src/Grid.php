@@ -12,26 +12,11 @@ class Grid
 
     public int $unitSize = 1;
 
-    // TODO: Move to Selection StdObject?
-    public int $startXCoord = 0;
-    public int $startYCoord = 0;
-    public int $endXCoord = 0;
-    public int $endYCoord = 0;
-
     /**
      * [
-     *    [000, 000],
-     *    [000, 001],
-     *    [000, 002],
-     *    ..........,
-     *    [999, 999],
-     * ]
-     *
-     * ---- OR ... ----
-     * [
-     *     Light#0 (contains x and y coords),
-     *     Light#1,
-     *     Light#2,
+     *     "0,0" => Light#0 (contains x and y coords),
+     *     "0,1" => Light#1,
+     *     "0,2" => Light#2,
      *     ...,
      *  ]
      * @var array
@@ -45,15 +30,19 @@ class Grid
 
     public function lightOnAtLocation(int $x, int $y)
     {
-        foreach ($this->map as $light) {
-            if ($light->)
+        $i = GridIteratorString::get($x, $y);
+        $light = $this->map[$i];
+        if (
+            $light instanceof Light &&
+            $light->getLocation() === [$x,$y]
+        ) {
+            return $light->on;
         }
-        return false;
+        throw new \RuntimeException('Error: Light not found');
     }
 
     private function initializeGridMap()
     {
-        $totalLights = 0;
         for (
             $x = $this->xMin;
             $x >= $this->xMin && $x <= $this->xMax;
@@ -64,10 +53,9 @@ class Grid
                 $y >= $this->yMin && $y <= $this->yMax;
                 $y++
             ) {
-                $this->map[] = new Light($x, $y);
-                $totalLights++;
+                $i = GridIteratorString::get($x, $y);
+                $this->map[$i] = new Light($x, $y);
             }
         }
-        echo "Total number of Light objects created: $totalLights\n";
     }
 }

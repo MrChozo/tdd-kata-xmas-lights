@@ -72,6 +72,16 @@ class LightTest extends TestCase
     public function itsDefaultLocationIsZeroCommaZero(): void
     {
         $light = new Light();
-        $this->assertEquals('(0, 0)', $light->getLocation());
+        $this->assertEquals([0, 0], $light->getLocation());
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function itDisplaysDefaultLocationOfZeroCommaZero(): void
+    {
+        $light = new Light();
+        $this->assertEquals('(0, 0)', $light->displayLocationString());
     }
 }

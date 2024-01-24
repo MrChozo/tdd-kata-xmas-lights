@@ -20,6 +20,11 @@ class Light
 
     public function getLocation()
     {
+        return [$this->xLocation, $this->yLocation];
+    }
+
+    public function displayLocationString()
+    {
         return '(' . $this->xLocation . ', ' . $this->yLocation . ')';
     }
 
