@@ -1,8 +1,8 @@
 <?php
 
+namespace Tests;
 
 use App\Light;
-use PHPUnit\Framework\TestCase;
 
 class LightTest extends TestCase
 {

@@ -4,13 +4,13 @@ namespace App;
 
 class Grid
 {
-    public int $xMin = 0;
-    public int $xMax = 5;
-
-    public int $yMin = 0;
-    public int $yMax = 5;
-
-    public int $unitSize = 1;
+    /**
+     * Grid size
+     */
+    public int $xMin;
+    public int $xMax;
+    public int $yMin;
+    public int $yMax;
 
     /**
      * [
@@ -25,6 +25,10 @@ class Grid
 
     public function __construct()
     {
+        $this->xMin = $_ENV['GRID_XMIN'];
+        $this->xMax = $_ENV['GRID_XMAX'];
+        $this->yMin = $_ENV['GRID_YMIN'];
+        $this->yMax = $_ENV['GRID_YMAX'];
         $this->initializeGridMap();
     }
 
@@ -65,7 +69,9 @@ class Grid
                 $this->map[$i] = new Light($x, $y);
             }
         }
-        $this->displayGridMap();
+        if ((bool)$_ENV['DEBUG']) {
+            $this->displayGridMap();
+        }
     }
 
     public function displayGridMap(): void
@@ -107,6 +113,8 @@ class Grid
                 $light->toggleOnOff();
             }
         }
-        $this->displayGridMap();
+        if ((bool)$_ENV['DEBUG']) {
+            $this->displayGridMap();
+        }
     }
 }

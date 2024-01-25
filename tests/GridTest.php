@@ -1,9 +1,10 @@
 <?php
 
+namespace Tests;
+
 use App\Grid;
 use App\GridIteratorString;
 use App\Selection;
-use PHPUnit\Framework\TestCase;
 
 class GridTest extends TestCase
 {
@@ -19,33 +20,20 @@ class GridTest extends TestCase
     }
 
     /**
-     * @test
-     * @return void
-     */
-    public function itsUnitSizeIsGreaterThanZero(): void
-    {
-        $grid = new Grid();
-        $this->assertTrue(($grid->unitSize > 0));
-    }
-
-    /**
+     * * Create Grid with random Selection(s) of lights on or off
+     * * Copy Grid
+     * * Run toggleLightsOnOff() using new random Selection
+     * * Verify all Lights in initial Grid have state opposite of copy
+     *
+     * toggleLightsOnOff() does a lot of heavy lifting for this test,
+     * but that's good.
+     *
      * @test
      * @return void
      * @throws \Random\RandomException
      */
     public function itLightsAnAreaUsingASelection(): void
     {
-        /**
-         * To truly test this:
-         *
-         * * Create Grid with random Selection(s) of lights on or off
-         * * Copy Grid
-         * * Run toggleLightsOnOff() using new random Selection
-         * * Verify all Lights in initial Grid have state opposite of copy
-         *
-         * This feels like that toggleLightsOnOff() will be doing a lot of
-         * heavy lifting for this test, but maybe that's good?
-         */
         $grid = new Grid();
         $numSelections = random_int(1, 10);
 
@@ -122,6 +110,10 @@ class GridTest extends TestCase
         );
     }
 
+    /**
+     * @param Selection $selection
+     * @return void
+     */
     private function displaySelection(Selection $selection): void
     {
         echo "($selection->startXCoord, $selection->startYCoord) to ($selection->endXCoord, $selection->endYCoord)\n";

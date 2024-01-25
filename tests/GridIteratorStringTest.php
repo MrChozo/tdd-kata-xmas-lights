@@ -1,8 +1,8 @@
 <?php
 
+namespace Tests;
 
 use App\GridIteratorString;
-use PHPUnit\Framework\TestCase;
 
 class GridIteratorStringTest extends TestCase
 {

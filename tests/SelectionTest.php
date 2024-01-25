@@ -1,9 +1,9 @@
 <?php
 
+namespace Tests;
 
 use App\Grid;
 use App\Selection;
-use PHPUnit\Framework\TestCase;
 
 class SelectionTest extends TestCase
 {
